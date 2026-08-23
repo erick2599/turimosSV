@@ -6,7 +6,6 @@ import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 
-
 type Props = {
     passwordRules: string;
 };

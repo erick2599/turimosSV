@@ -89,7 +89,9 @@ export default function DeleteUser() {
                                     name="password"
                                     ref={passwordInput}
                                     value={data.password} // Conectado al estado
-                                    onChange={(e) => setData('password', e.target.value)} // Guardar valor
+                                    onChange={(e) =>
+                                        setData('password', e.target.value)
+                                    } // Guardar valor
                                     placeholder="Password"
                                     autoComplete="current-password"
                                 />
