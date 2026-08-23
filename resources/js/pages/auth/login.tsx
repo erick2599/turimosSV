@@ -9,7 +9,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 
-
 type Props = {
     status?: string;
     canResetPassword: boolean;
@@ -21,7 +20,6 @@ export default function Login({ status, canResetPassword }: Props) {
             <Head title="Log in" />
 
             <Form
-             
                 method="post"
                 resetOnSuccess={['password']}
                 className="flex flex-col gap-6"
@@ -49,7 +47,6 @@ export default function Login({ status, canResetPassword }: Props) {
                                     <Label htmlFor="password">Password</Label>
                                     {canResetPassword && (
                                         <TextLink
-                                           
                                             className="ml-auto text-sm"
                                             tabIndex={5}
                                         >

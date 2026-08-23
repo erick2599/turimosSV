@@ -6,7 +6,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Spinner } from '@/components/ui/spinner';
 
-
 type Props = {
     token: string;
     email: string;
@@ -18,9 +17,7 @@ export default function ResetPassword({ token, email, passwordRules }: Props) {
         <>
             <Head title="Reset password" />
 
-            <Form
-               
-            >
+            <Form>
                 {({ processing, errors }) => (
                     <div className="grid gap-6">
                         <div className="grid gap-2">

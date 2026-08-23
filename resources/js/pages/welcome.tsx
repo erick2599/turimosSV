@@ -1,6 +1,5 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 
-
 export default function Welcome() {
     const { auth } = usePage().props;
 
@@ -19,11 +18,7 @@ export default function Welcome() {
                             </Link>
                         ) : (
                             <>
-                                <Link
-                                   
-                                >
-                                    
-                                </Link>
+                                <Link></Link>
                             </>
                         )}
                     </nav>
