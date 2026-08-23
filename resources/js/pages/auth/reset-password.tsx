@@ -1,4 +1,7 @@
+/* prettier-ignore */
 import { Form, Head } from '@inertiajs/react';
+// ... el resto de tu código igual
+
 import InputError from '@/components/input-error';
 import PasswordInput from '@/components/password-input';
 import { Button } from '@/components/ui/button';
