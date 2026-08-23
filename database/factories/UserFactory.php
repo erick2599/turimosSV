@@ -38,7 +38,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
@@ -46,5 +46,15 @@ class UserFactory extends Factory
     /**
      * Indicate that the model has two-factor authentication configured.
      */
-    public function withTwoFactor(): static {}
+    public function withTwoFactor(): static
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                // tus atributos modificados...
+            ];
+        }); // <-- Asegúrate de que este bloque o la función termine retornando el estado
+
+        // O si aplicas el state directamente:
+        // return $this->state(...);
+    }
 }
