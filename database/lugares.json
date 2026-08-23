@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "titulo": "El Tunco",
+        "departamento": "La Libertad",
+        "categoria": "Playa",
+        "precio": "Gratis (Acceso público)",
+        "descripcion": "Famosa playa para el surf y vida nocturna."
+    },
+    {
+        "id": 2,
+        "titulo": "Ruta de las Flores",
+        "departamento": "Ahuachapán / Sonsonate",
+        "categoria": "Montaña / Cultura",
+        "precio": "Variable",
+        "descripcion": "Serie de pueblos pintorescos con clima fresco."
+    },
+    {
+        "id": 3,
+        "titulo": "Ichanmichen",
+        "departamento": "La Paz",
+        "categoria": "Parque Recreativo ",
+        "precio": "2.50",
+        "descripcion": "Parque recreativo con piscinas y toboganes"
+    }
+]
