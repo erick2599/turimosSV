@@ -1,4 +1,4 @@
-import { Form } from '@inertiajs/react';
+import { useForm } from '@inertiajs/react'; // 1. Cambiado Form por useForm
 import { useRef } from 'react';
 import Heading from '@/components/heading';
 import InputError from '@/components/input-error';
@@ -17,6 +17,30 @@ import { Label } from '@/components/ui/label';
 
 export default function DeleteUser() {
     const passwordInput = useRef<HTMLInputElement>(null);
+
+    // 2. Inicializar el hook de formulario de Inertia
+    const {
+        data,
+        setData,
+        delete: destroy, // Renombrado porque 'delete' es palabra reservada
+        processing,
+        errors,
+        reset,
+        clearErrors,
+    } = useForm({
+        password: '',
+    });
+
+    // 3. Función para procesar el envío del formulario
+    const deleteUser = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        destroy('/settings/profile', {
+            preserveScroll: true,
+            onSuccess: () => reset(),
+            onError: () => passwordInput.current?.focus(),
+        });
+    };
 
     return (
         <div className="space-y-6">
@@ -53,65 +77,50 @@ export default function DeleteUser() {
                             permanently delete your account.
                         </DialogDescription>
 
-                        <Form
-                            action="/settings/profile"
-                            method="delete"
-                            options={{
-                                preserveScroll: true,
-                            }}
-                            onError={() => passwordInput.current?.focus()}
-                            resetOnSuccess
-                            className="space-y-6"
-                        >
-                            {({ resetAndClearErrors, processing, errors }) => (
-                                <>
-                                    <div className="grid gap-2">
-                                        <Label
-                                            htmlFor="password"
-                                            className="sr-only"
-                                        >
-                                            Password
-                                        </Label>
+                        {/* 4. Cambiado a etiqueta HTML <form> estándar */}
+                        <form onSubmit={deleteUser} className="space-y-6">
+                            <div className="grid gap-2">
+                                <Label htmlFor="password" className="sr-only">
+                                    Password
+                                </Label>
 
-                                        <PasswordInput
-                                            id="password"
-                                            name="password"
-                                            ref={passwordInput}
-                                            placeholder="Password"
-                                            autoComplete="current-password"
-                                        />
+                                <PasswordInput
+                                    id="password"
+                                    name="password"
+                                    ref={passwordInput}
+                                    value={data.password} // Conectado al estado
+                                    onChange={(e) => setData('password', e.target.value)} // Guardar valor
+                                    placeholder="Password"
+                                    autoComplete="current-password"
+                                />
 
-                                        <InputError message={errors.password} />
-                                    </div>
+                                <InputError message={errors.password} />
+                            </div>
 
-                                    <DialogFooter className="gap-2">
-                                        <DialogClose asChild>
-                                            <Button
-                                                variant="secondary"
-                                                onClick={() =>
-                                                    resetAndClearErrors()
-                                                }
-                                            >
-                                                Cancel
-                                            </Button>
-                                        </DialogClose>
+                            <DialogFooter className="gap-2">
+                                <DialogClose asChild>
+                                    <Button
+                                        variant="secondary"
+                                        onClick={() => {
+                                            reset();
+                                            clearErrors();
+                                        }}
+                                    >
+                                        Cancel
+                                    </Button>
+                                </DialogClose>
 
-                                        <Button
-                                            variant="destructive"
-                                            disabled={processing}
-                                            asChild
-                                        >
-                                            <button
-                                                type="submit"
-                                                data-test="confirm-delete-user-button"
-                                            >
-                                                Delete account
-                                            </button>
-                                        </Button>
-                                    </DialogFooter>
-                                </>
-                            )}
-                        </Form>
+                                {/* 5. Limpiado el botón duplicado */}
+                                <Button
+                                    type="submit"
+                                    variant="destructive"
+                                    disabled={processing}
+                                    data-test="confirm-delete-user-button"
+                                >
+                                    Delete account
+                                </Button>
+                            </DialogFooter>
+                        </form>
                     </DialogContent>
                 </Dialog>
             </div>
