@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class LugarController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Contracts\View\View
     {
         $lugares = Lugar::all();
 
         return view('lugares.index', compact('lugares'));
     }
 
-    public function show($id)
+    public function show(string $id): string
     {
         $lugar = Lugar::find($id);
         if (! $lugar) {
@@ -27,7 +27,7 @@ class LugarController extends Controller
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-        <title>".$lugar['titulo']."</title>
+        <title>" . $lugar['titulo'] . "</title>
         
         
         <style>
@@ -68,30 +68,30 @@ class LugarController extends Controller
     <body class='d-flex flex-column min-vh-100'>
         <nav class='navbar'>
             <div class='container'>
-                <a class='navbar-brand' href='".route('lugares.index')."'>🇸🇻 El Salvador Explora</a>
+                <a class='navbar-brand' href='" . route('lugares.index') . "'>🇸🇻 El Salvador Explora</a>
             </div>
         </nav>
         
         <main class='container my-4' style='flex: 1;'>
             <div class='mb-3'>
-                <a href='".route('lugares.index')."' class='btn-back'>&larr; Volver al catálogo</a>
+                <a href='" . route('lugares.index') . "' class='btn-back'>&larr; Volver al catálogo</a>
             </div>
             
             <div class='row'>
                 <div class='col-lg-7'>
                     <div class='card-info'>
-                        <span class='badge'>".$lugar['categoria']."</span>
-                        <h1 class='fw-bold text-dark' style='margin: 0 0 10px 0;'>".$lugar['titulo']."</h1>
+                        <span class='badge'>" . $lugar['categoria'] . "</span>
+                        <h1 class='fw-bold text-dark' style='margin: 0 0 10px 0;'>" . $lugar['titulo'] . "</h1>
                         
                         <table class='table-info'>
                             <tbody>
-                                <tr><th>Ubicación:</th><td class='fw-bold text-dark'>".$lugar['departamento']."</td></tr>
-                                <tr><th>Costo:</th><td><span class='text-success fw-bold'>".$lugar['precio']."</span></td></tr>
+                                <tr><th>Ubicación:</th><td class='fw-bold text-dark'>" . $lugar['departamento'] . "</td></tr>
+                                <tr><th>Costo:</th><td><span class='text-success fw-bold'>" . $lugar['precio'] . "</span></td></tr>
                             </tbody>
                         </table>
                         
                         <h5 class='fw-bold desc-title'>Descripción</h5>
-                        <p class='desc-text'>".$lugar['descripcion']."</p>
+                        <p class='desc-text'>" . $lugar['descripcion'] . "</p>
                     </div>
                 </div>
                 
@@ -99,8 +99,8 @@ class LugarController extends Controller
                     <div class='card-form'>
                         <div class='card-header'>Solicitar más información</div>
                         <div class='card-body'>
-                            <form action='".route('lugares.contacto')."' method='POST'>
-                                <input type='hidden' name='_token' value='".csrf_token()."'>
+                            <form action='" . route('lugares.contacto') . "' method='POST'>
+                                <input type='hidden' name='_token' value='" . csrf_token() . "'>
                                 <div class='mb-3'>
                                     <label class='form-label'>Nombre completo</label>
                                     <input type='text' class='form-control' name='nombre' placeholder='Ej. Juan Pérez' required>
@@ -122,13 +122,13 @@ class LugarController extends Controller
         </main>
         
         <footer>
-            <p style='margin:0;'>&copy; ".date('Y').' Lavarel de prueba</p>
+            <p style='margin:0;'>&copy; " . date('Y') . ' Lavarel de prueba</p>
         </footer>
     </body>
     </html>';
     }
 
-    public function contactar(Request $request)
+    public function contactar(Request $request): \Illuminate\Http\RedirectResponse
     {
         $request->validate([
             'nombre' => 'required',

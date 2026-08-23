@@ -48,13 +48,9 @@ class UserFactory extends Factory
      */
     public function withTwoFactor(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                // tus atributos modificados...
-            ];
-        }); // <-- Asegúrate de que este bloque o la función termine retornando el estado
-
-        // O si aplicas el state directamente:
-        // return $this->state(...);
+        return $this->state(fn(array $attributes) => [
+            'two_factor_secret' => 'placeholder-secret',
+            'two_factor_recovery_codes' => 'placeholder-codes',
+        ]);
     }
 }

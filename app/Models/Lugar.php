@@ -4,7 +4,10 @@ namespace App\Models;
 
 class Lugar
 {
-    public static function all()
+    /**
+     * @return array<mixed>
+     */
+    public static function all(): array
     {
         // Usamos base_path para apuntar directamente a la carpeta database
         $path = base_path('database/lugares.json');
@@ -13,12 +16,16 @@ class Lugar
             return []; // Retorna vacío si el archivo no está ahí
         }
 
-        $json = file_get_contents($path);
+        // Forzamos a string para asegurar que json_decode nunca reciba false
+        $json = (string) file_get_contents($path);
 
         return json_decode($json, true) ?? [];
     }
 
-    public static function find(String $id)
+    /**
+     * @return array<mixed>|null
+     */
+    public static function find(string $id): ?array
     {
         $lugares = self::all();
         foreach ($lugares as $lugar) {
