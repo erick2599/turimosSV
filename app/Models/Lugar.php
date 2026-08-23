@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Lugar
 {
-    public static function all(): array
+    public static function all()
     {
         // Usamos base_path para apuntar directamente a la carpeta database
         $path = base_path('database/lugares.json');
@@ -14,13 +14,8 @@ class Lugar
         }
 
         $json = file_get_contents($path);
-        if ($json === false) {
-            return [];
-        }
 
-        $data = json_decode($json, true);
-
-        return is_array($data) ? $data : [];
+        return json_decode($json, true) ?? [];
     }
 
     public static function find(String $id)
