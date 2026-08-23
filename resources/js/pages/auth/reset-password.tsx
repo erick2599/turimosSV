@@ -12,7 +12,7 @@ type Props = {
     passwordRules: string;
 };
 
-export default function ResetPassword({ token, email, passwordRules }: Props) {
+export default function ResetPassword({  email, passwordRules }: Props) {
     return (
         <>
             <Head title="Reset password" />
